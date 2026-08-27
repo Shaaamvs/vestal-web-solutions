@@ -13,7 +13,7 @@ import {
 import { ScrollReveal } from './ScrollReveal';
 import whychoose from '../image/whychooseus.jpg';
 import AffordablePackages from '../image/packages.webp';
-import FastTurnaround from '../image/fast turnaround.jpg';
+import FastTurnaround from '../image/Fastturnaround.jpg';
 import CustomizedDesigns from '../image/customized designs.jpg';
 import customersupport from '../image/customer support.jpg';
 
