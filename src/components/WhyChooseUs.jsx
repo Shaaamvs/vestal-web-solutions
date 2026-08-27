@@ -22,7 +22,7 @@ const WHY_CHOOSE_ITEMS = [
   {
     id: 'affordable-packages',
     number: '01',
-    title: 'Affordable Packages',
+    title: 'Affordable123 Packages',
     description: 'Competitive pricing without compromising on quality. We offer flexible packages for every budget.',
     image: AffordablePackages,
     badge: 'Value Focused',
