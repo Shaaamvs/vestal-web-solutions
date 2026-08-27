@@ -42,7 +42,7 @@ const WHY_CHOOSE_ITEMS = [
     number: '03',
     title: 'Customized Designs',
     description: 'Unique, tailored solutions that perfectly match your brand identity and business objectives.',
-    image:  src={CustomizedDesigns},
+    image: CustomizedDesigns,
     badge: '100% Tailored',
     icon: 'design'
   },
