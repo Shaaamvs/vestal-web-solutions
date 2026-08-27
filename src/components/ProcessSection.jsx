@@ -1,15 +1,15 @@
 import React from 'react';
 import { PROCESS_STEPS } from '../data/agencyData';
-import { 
-  Sparkles, 
-  Clock, 
-  ArrowRight, 
-  Compass, 
-  Layout, 
-  Code2, 
-  ShieldCheck, 
-  Rocket, 
-  GitBranch, 
+import {
+  Sparkles,
+  Clock,
+  ArrowRight,
+  Compass,
+  Layout,
+  Code2,
+  ShieldCheck,
+  Rocket,
+  GitBranch,
   ChevronRight
 } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';
@@ -28,13 +28,13 @@ export const ProcessSection = ({ onStartProject }) => {
 
   return (
     <section id="process" className="py-16 sm:py-24 bg-slate-50 border-b border-slate-200 relative overflow-hidden">
-      
+
       {/* Background Subtle Grid Accent */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f015_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f015_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
       <div className="absolute top-1/4 right-1/4 w-[450px] h-[350px] bg-blue-100/35 blur-3xl rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
+
         {/* Section Header */}
         <ScrollReveal direction="up" distance={25} duration={0.55}>
           <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-3">
@@ -42,11 +42,11 @@ export const ProcessSection = ({ onStartProject }) => {
               <GitBranch className="w-3.5 h-3.5 text-[#0F52BA]" />
               <span>Milestone Execution Timeline</span>
             </div>
-            
+
             <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1E3A8A] tracking-tight leading-tight">
               From Idea to Launch
             </h2>
-            
+
             <p className="text-[1rem] text-[#36454F] leading-relaxed">
               Transparent, milestone-based execution engineered for quick turnarounds and zero surprises.
             </p>
@@ -93,7 +93,8 @@ export const ProcessSection = ({ onStartProject }) => {
                       {step.title}
                     </h3>
 
-                    <p className="text-xs sm:text-[13px] text-[#36454F] leading-relaxed font-normal">
+                    {/* Description: 1rem / 16px on all devices */}
+                    <p className="text-base text-[#36454F] leading-relaxed font-normal">
                       {step.description}
                     </p>
                   </div>

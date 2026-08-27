@@ -20,7 +20,6 @@ export const ContactSection = ({ preselectedServiceOrPackage }) => {
     email: '',
     phone: '',
     projectType: 'Website Development',
-    budgetRange: '₹15,000 – ₹30,000',
     timeline: 'Standard (1–2 weeks)',
     details: ''
   });
@@ -650,14 +649,7 @@ export const ContactSection = ({ preselectedServiceOrPackage }) => {
                   </button>
 
                   {/* Micro reassurance line */}
-                  <div className="flex items-center justify-center gap-3 text-xs text-slate-500 pt-1">
-                    <span className="flex items-center gap-1 text-slate-600 font-medium">
-                      <ShieldCheck className="w-3.5 h-3.5 text-[#0F52BA]" />
-                      No obligation
-                    </span>
-                    <span>•</span>
-                    <span className="text-slate-600 font-medium">Direct response from our lead engineer</span>
-                  </div>
+            
 
                 </form>
               )}
