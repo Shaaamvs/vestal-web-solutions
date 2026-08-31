@@ -6,12 +6,11 @@ import PageSpeedOptimization from '../image/Page Speed Optimization.webp';
 import contentWriting from '../image/content Writing.jpg';
 import maintenanceImage from '../image/Website Maintenance.jpg';
 import hostingImage from '../image/Web Hosting.jpg';
-import featureimage from '../image/banner section.jpg';
 
 export const AGENCY_INFO = {
   name: "Vestal Web Solutions",
   tagline: "Web Design, WordPress & SEO Services for Business Growth",
-  featureImage: featureimage,
+
   description: "Vestal Web Solutions provides professional web design, WordPress development, e-commerce, and SEO services to help businesses improve Google rankings, attract more customers, and grow online.",
   email: "info.vestalws@gmail.com",
   phone: "+91 75501 56797",
