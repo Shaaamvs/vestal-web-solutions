@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowRight, Mail, ChevronRight } from 'lucide-react';
 import { AGENCY_INFO } from '../data/agencyData';
+import logo from '../image/v.svg';
 
 export const Header = ({ onOpenQuote }) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -15,7 +16,7 @@ export const Header = ({ onOpenQuote }) => {
       // Total document height and scroll threshold check
       const windowHeight = window.innerHeight;
       const docHeight = document.documentElement.scrollHeight;
-      
+
       // Bottom of page detection (activates contact section)
       if (scrollY + windowHeight >= docHeight - 80) {
         setActiveSection('contact');
@@ -94,8 +95,8 @@ export const Header = ({ onOpenQuote }) => {
   return (
     <>
       {/* Top Micro-Announcement Bar */}
-      <div 
-        id="top-announcement-bar" 
+      <div
+        id="top-announcement-bar"
         className="bg-[#1E3A8A] text-white text-xs font-medium py-2 px-4 hidden md:block border-b border-blue-900/40 select-none transition-colors duration-200"
       >
         <div className="max-w-7xl mx-auto flex justify-between items-center">
@@ -110,18 +111,18 @@ export const Header = ({ onOpenQuote }) => {
             <span className="text-blue-300/60">•</span>
             <span className="text-blue-200 font-normal">Custom WordPress, WooCommerce &amp; High-Speed Web Apps</span>
           </div>
-          
+
           <div className="flex items-center space-x-5 text-blue-100 text-xs">
-            <a 
-              href={`mailto:${AGENCY_INFO.email}`} 
+            <a
+              href={`mailto:${AGENCY_INFO.email}`}
               className="no-underline text-blue-100 hover:text-white transition-colors duration-200 flex items-center gap-1.5 focus:outline-none focus:ring-1 focus:ring-blue-300 rounded px-1"
             >
               <Mail className="w-3.5 h-3.5 text-cyan-300 shrink-0" />
               <span>{AGENCY_INFO.email}</span>
             </a>
             <span className="text-blue-300/60">•</span>
-            <a 
-              href="#contact" 
+            <a
+              href="#contact"
               onClick={(e) => handleNavClick(e, '#contact')}
               className="no-underline text-blue-100 hover:text-white transition-colors duration-200 flex items-center gap-1 font-semibold group focus:outline-none focus:ring-1 focus:ring-blue-300 rounded px-1"
             >
@@ -135,15 +136,14 @@ export const Header = ({ onOpenQuote }) => {
       {/* Main Sticky Header */}
       <header
         id="main-sticky-header"
-        className={`sticky top-0 z-50 transition-all duration-300 ease-in-out select-none ${
-          isScrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-md border-b border-slate-200/90 py-2.5 sm:py-3'
-            : 'bg-white border-b border-slate-100 py-3.5 sm:py-4'
-        }`}
+        className={`sticky top-0 z-50 transition-all duration-300 ease-in-out select-none ${isScrolled
+          ? 'bg-white/95 backdrop-blur-md shadow-md border-b border-slate-200/90 py-2.5 sm:py-3'
+          : 'bg-white border-b border-slate-100 py-3.5 sm:py-4'
+          }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-4">
-            
+
             {/* Brand Logo */}
             <a
               id="brand-logo-link"
@@ -151,8 +151,17 @@ export const Header = ({ onOpenQuote }) => {
               onClick={(e) => handleNavClick(e, '#home')}
               className="no-underline flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0F52BA] rounded-xl transition-transform duration-200 hover:scale-[1.01]"
             >
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0F52BA] to-[#1E3A8A] text-white flex items-center justify-center font-heading font-bold text-xl shadow-md shadow-blue-900/10 group-hover:shadow-lg group-hover:shadow-blue-600/20 group-hover:from-[#1E3A8A] group-hover:to-[#0F52BA] transition-all duration-300 shrink-0">
+              {/* <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0F52BA] to-[#1E3A8A] text-white flex items-center justify-center font-heading font-bold text-xl shadow-md shadow-blue-900/10 group-hover:shadow-lg group-hover:shadow-blue-600/20 group-hover:from-[#1E3A8A] group-hover:to-[#0F52BA] transition-all duration-300 shrink-0">
                 <span className="tracking-tight">V</span>
+              
+              </div> */}
+
+              <div className="shrink-0 flex items-center">
+                <img
+                  src={logo}
+                  alt="Vestal Web Solutions Logo"
+                  className="w-auto h-10 max-w-[180px] object-contain transition-transform duration-300 ease-out hover:scale-105"
+                />
               </div>
               <div className="flex flex-col">
                 <span className="font-heading font-bold text-xl sm:text-2xl text-[#1E3A8A] tracking-tight leading-tight group-hover:text-[#0F52BA] transition-colors duration-200">
@@ -165,12 +174,28 @@ export const Header = ({ onOpenQuote }) => {
                   <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
                 </div>
               </div>
+
+              {/* <div className="flex flex-col items-start">
+                <img
+                  src={logo}
+                  alt="Vestal Web Solutions Logo"
+                  className="w-[90%] h-auto object-contain transition-transform duration-500 ease-out hover:scale-110 origin-left"
+                />
+
+                <div className="flex items-center justify-start gap-1.5 mt-1">
+                  <span className="text-[10px] tracking-wider text-slate-500 uppercase font-bold">
+                    Digital Agency
+                  </span>
+
+                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                </div>
+              </div> */}
             </a>
 
             {/* Desktop Navigation Menu (No Underlines, Smooth Hover Transitions, Active Highlighting) */}
-            <nav 
-              id="desktop-navigation" 
-              className="hidden lg:flex items-center gap-1 bg-slate-50/90 p-1.5 rounded-xl border border-slate-200/70 shadow-inner" 
+            <nav
+              id="desktop-navigation"
+              className="hidden lg:flex items-center gap-1 bg-slate-50/90 p-1.5 rounded-xl border border-slate-200/70 shadow-inner"
               aria-label="Main Navigation"
             >
               {navLinks.map((link) => {
@@ -181,11 +206,10 @@ export const Header = ({ onOpenQuote }) => {
                     id={`nav-link-${link.id}`}
                     href={link.href}
                     onClick={(e) => handleNavClick(e, link.href)}
-                    className={`no-underline relative px-3.5 py-1.5 rounded-lg text-[13px] font-semibold transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
-                      isActive
-                        ? 'text-[#0F52BA] bg-white shadow-xs border border-blue-200/90 font-bold ring-1 ring-blue-500/10'
-                        : 'text-slate-600 hover:text-[#0F52BA] hover:bg-white/70 hover:shadow-xs'
-                    }`}
+                    className={`no-underline relative px-3.5 py-1.5 rounded-lg text-[13px] font-semibold transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${isActive
+                      ? 'text-[#0F52BA] bg-white shadow-xs border border-blue-200/90 font-bold ring-1 ring-blue-500/10'
+                      : 'text-slate-600 hover:text-[#0F52BA] hover:bg-white/70 hover:shadow-xs'
+                      }`}
                   >
                     {isActive && (
                       <span className="w-1.5 h-1.5 rounded-full bg-[#0F52BA] shrink-0 animate-pulse"></span>
@@ -225,8 +249,8 @@ export const Header = ({ onOpenQuote }) => {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div 
-            id="mobile-navigation-drawer" 
+          <div
+            id="mobile-navigation-drawer"
             className="lg:hidden border-t border-slate-200 bg-white/98 backdrop-blur-xl shadow-2xl animate-in slide-in-from-top duration-200 mt-2"
           >
             <div className="max-w-7xl mx-auto px-4 pt-3 pb-6 space-y-1.5">
@@ -236,11 +260,10 @@ export const Header = ({ onOpenQuote }) => {
                   id={`mobile-nav-link-${link.id}`}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className={`no-underline block px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 ${
-                    activeSection === link.id
-                      ? 'bg-blue-50/90 text-[#0F52BA] font-bold border border-blue-200/60 shadow-xs'
-                      : 'text-slate-700 hover:bg-slate-50 hover:text-[#0F52BA]'
-                  }`}
+                  className={`no-underline block px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 ${activeSection === link.id
+                    ? 'bg-blue-50/90 text-[#0F52BA] font-bold border border-blue-200/60 shadow-xs'
+                    : 'text-slate-700 hover:bg-slate-50 hover:text-[#0F52BA]'
+                    }`}
                 >
                   <div className="flex items-center justify-between">
                     <span>{link.name}</span>

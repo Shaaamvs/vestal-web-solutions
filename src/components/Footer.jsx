@@ -1,14 +1,16 @@
 import React from 'react';
 import { AGENCY_INFO } from '../data/agencyData';
-import { 
-  Mail, 
-  ChevronRight, 
-  Linkedin, 
-  Twitter, 
-  Instagram, 
-  Facebook 
+import {
+  Mail,
+  ChevronRight,
+  Linkedin,
+  Twitter,
+  Instagram,
+  Facebook
 } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';
+import logo from '../image/v.svg';
+
 
 export const Footer = ({ onNavigate }) => {
   const servicesList = [
@@ -36,17 +38,22 @@ export const Footer = ({ onNavigate }) => {
 
   return (
     <footer id="main-footer" className="bg-[#0B192C] text-slate-300 border-t border-slate-800">
-      
+
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
         <ScrollReveal direction="up" distance={20} duration={0.5}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
-            
+
             {/* Brand Column (Col Span 5) */}
             <div className="lg:col-span-5 space-y-5">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-lg bg-[#0F52BA] text-white flex items-center justify-center font-heading font-bold text-xl shadow-sm">
-                  <span>V</span>
+                  {/* <span>V</span> */}
+                  <img
+                    src={logo}
+                    alt="Vestal Web Solutions Logo"
+                    className="w-auto h-10 max-w-[180px] object-contain transition-transform duration-300 ease-out hover:scale-105"
+                  />
                 </div>
                 <div>
                   <span className="font-heading font-bold text-2xl text-white tracking-tight">
