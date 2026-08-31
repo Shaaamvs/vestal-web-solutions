@@ -9,7 +9,9 @@ import {
   Facebook
 } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';
-import logo from '../image/v.svg';
+import logo from '../image/logo_V.png';
+
+
 
 
 export const Footer = ({ onNavigate }) => {
