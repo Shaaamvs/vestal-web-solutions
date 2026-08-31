@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowRight, Mail, ChevronRight } from 'lucide-react';
 import { AGENCY_INFO } from '../data/agencyData';
-import logo from '../image/v.svg';
+import logo from '../image/logo_V.png';
 
 export const Header = ({ onOpenQuote }) => {
   const [isScrolled, setIsScrolled] = useState(false);
