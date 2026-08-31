@@ -9,7 +9,7 @@ import {
   Facebook
 } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';
-import logo from '../image/logo_V.png';
+import logo from '../image/V.svg';
 
 
 
