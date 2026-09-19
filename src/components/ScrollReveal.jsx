@@ -21,11 +21,11 @@ export const ScrollReveal = ({
       return;
     }
 
-    // Immediately check if already visible or top in viewport
+    // Check bounding rect in viewport
     const checkBounding = () => {
       if (!element) return;
       const rect = element.getBoundingClientRect();
-      if (rect.top < window.innerHeight + 100 && rect.bottom > -100) {
+      if (rect.top < window.innerHeight + 150 && rect.bottom > -100) {
         setIsVisible(true);
       }
     };
@@ -53,11 +53,15 @@ export const ScrollReveal = ({
       },
       {
         threshold: 0.01,
-        rootMargin: '100px 0px 100px 0px'
+        rootMargin: '120px 0px 120px 0px'
       }
     );
 
     observer.observe(element);
+
+    // Fallback passive scroll listener in case IntersectionObserver lags in iframes
+    window.addEventListener('scroll', checkBounding, { passive: true });
+    window.addEventListener('resize', checkBounding, { passive: true });
 
     // Fail-safe fallback timer so content is never permanently hidden
     const timer = setTimeout(() => {
@@ -66,6 +70,8 @@ export const ScrollReveal = ({
 
     return () => {
       clearTimeout(timer);
+      window.removeEventListener('scroll', checkBounding);
+      window.removeEventListener('resize', checkBounding);
       if (element) {
         observer.unobserve(element);
       }
@@ -96,11 +102,11 @@ export const ScrollReveal = ({
       id={id}
       className={`transition-all duration-500 ease-out ${className}`}
       style={{
-        opacity: isVisible ? 1 : 0.05,
+        opacity: isVisible ? 1 : 0,
         transform: getTransform(),
         transitionDuration: `${duration}s`,
         transitionDelay: `${delay}ms`,
-        willChange: 'opacity, transform'
+        willChange: isVisible ? 'auto' : 'opacity, transform'
       }}
     >
       {children}

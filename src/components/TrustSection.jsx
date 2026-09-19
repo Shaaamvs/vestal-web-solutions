@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { TRUST_CLIENTS } from '../data/agencyData';
 import { ClientLogo } from './ClientLogo';
 import { 
@@ -10,8 +10,6 @@ import {
 import { ScrollReveal } from './ScrollReveal';
 
 export const TrustSection = ({ onSelectClient }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
   // Triple repeat list for seamless continuous infinite stream
   const marqueeClients = [...TRUST_CLIENTS, ...TRUST_CLIENTS, ...TRUST_CLIENTS];
 
@@ -47,34 +45,25 @@ export const TrustSection = ({ onSelectClient }) => {
         </ScrollReveal>
 
         {/* INFINITE MARQUEE STREAM */}
-        <ScrollReveal direction="up" distance={20} delay={100} duration={0.5}>
-          <div 
-            className="relative overflow-hidden py-3"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
-            {/* Gradient edge fades for polished infinite scroll look */}
-            <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 bg-linear-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 bg-linear-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
+        <div className="relative overflow-hidden py-3">
+          {/* Gradient edge fades for polished infinite scroll look */}
+          <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 bg-linear-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 bg-linear-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
 
-            <div 
-              className={`flex gap-5 sm:gap-6 w-max ${isHovered ? 'animation-pause' : ''}`}
-              style={{
-                animation: 'marqueeStream 28s linear infinite'
-              }}
-            >
-              {marqueeClients.map((client, idx) => (
-                <div
-                  key={`${client.id}-${idx}`}
-                  onClick={() => onSelectClient && onSelectClient(client.id)}
-                  className="group px-6 sm:px-8 py-3.5 sm:py-4 bg-white hover:bg-slate-50 rounded-2xl border border-slate-200/90 hover:border-[#0F52BA] transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 flex items-center justify-center cursor-pointer shrink-0 min-w-[170px] sm:min-w-[200px]"
-                >
-                  <ClientLogo client={client} size="md" />
-                </div>
-              ))}
-            </div>
+          <div 
+            className="marquee-track flex gap-5 sm:gap-6 w-max select-none"
+          >
+            {marqueeClients.map((client, idx) => (
+              <div
+                key={`${client.id}-${idx}`}
+                onClick={() => onSelectClient && onSelectClient(client.id)}
+                className="group px-6 sm:px-8 py-3.5 sm:py-4 bg-white hover:bg-slate-50 rounded-2xl border border-slate-200/90 hover:border-[#0F52BA] transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 flex items-center justify-center cursor-pointer shrink-0 min-w-[170px] sm:min-w-[200px]"
+              >
+                <ClientLogo client={client} size="md" />
+              </div>
+            ))}
           </div>
-        </ScrollReveal>
+        </div>
 
       </div>
 
@@ -82,14 +71,20 @@ export const TrustSection = ({ onSelectClient }) => {
       <style>{`
         @keyframes marqueeStream {
           0% {
-            transform: translateX(0);
+            transform: translate3d(0, 0, 0);
           }
           100% {
-            transform: translateX(-33.333%);
+            transform: translate3d(-33.333%, 0, 0);
           }
         }
-        .animation-pause {
-          animation-play-state: paused !important;
+        .marquee-track {
+          animation: marqueeStream 28s linear infinite;
+          will-change: transform;
+        }
+        @media (hover: hover) and (pointer: fine) {
+          .marquee-track:hover {
+            animation-play-state: paused;
+          }
         }
       `}</style>
     </section>

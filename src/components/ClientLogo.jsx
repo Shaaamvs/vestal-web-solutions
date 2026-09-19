@@ -4,7 +4,7 @@ import { ExternalLink } from 'lucide-react';
 import AmmatLogo from '../image/Ammat.webp';
 import AvvElectricalLogo from '../image/AVV-Electicals-logo-1 (1).png';
 import ChennaiChemicalsLogo from '../image/chennai chemicals.png';
-import CmpLogo from '../image/Cmp 1.png';
+import CmpLogo from '../image/Cmp.png';
 import LarioLogo from '../image/lario.png';
 import PpvacLogo from '../image/Ppvac.png';
 import WingsWomenLogo from '../image/wings women 1.png';
@@ -43,12 +43,6 @@ export const ClientLogo = ({
   const logo = clientLogos[client?.id];
   const website = clientWebsites[client?.id];
 
-  const handleClick = () => {
-    if (website && website !== '#') {
-      window.open(website, '_blank', 'noopener,noreferrer');
-    }
-  };
-
   return (
     <div
       className={`
@@ -60,15 +54,15 @@ export const ClientLogo = ({
         select-none
         overflow-hidden
         rounded-lg
-        ${website && website !== '#' ? 'cursor-pointer' : ''}
       `}
-      onClick={website && website !== '#' ? handleClick : undefined}
     >
       {logo ? (
         <div className="flex h-full w-full items-center justify-center p-2">
           <img
             src={logo}
             alt={client?.name || 'Client Logo'}
+            loading="lazy"
+            decoding="async"
             className="
               block
               h-full
@@ -90,7 +84,12 @@ export const ClientLogo = ({
 
       {/* External link icon */}
       {website && website !== '#' && (
-        <div
+        <a
+          href={website}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          title={`Visit ${client?.name || 'client'} website`}
           className="
             absolute
             right-1.5
@@ -108,7 +107,7 @@ export const ClientLogo = ({
             backdrop-blur-sm
             transition-all
             duration-300
-            hover:bg-gray-900
+            hover:bg-[#0F52BA]
             hover:text-white
           "
         >
@@ -116,7 +115,7 @@ export const ClientLogo = ({
             size={13}
             strokeWidth={2}
           />
-        </div>
+        </a>
       )}
     </div>
   );

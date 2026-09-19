@@ -61,9 +61,7 @@ export default function App() {
         />
 
         {/* 3. Trust / Client Partners Introduction */}
-        <ScrollReveal direction="up" distance={25} duration={0.6}>
-          <TrustSection onSelectClient={() => scrollToSection('contact')} />
-        </ScrollReveal>
+        <TrustSection onSelectClient={() => scrollToSection('contact')} />
 
         {/* 4. Interactive Services Section */}
         <ScrollReveal direction="up" distance={30} duration={0.6}>
