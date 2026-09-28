@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronUp } from 'lucide-react';
+import { ChevronUp, Phone } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { AGENCY_INFO } from '../data/agencyData';
 
 export const FloatingActions = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [showTooltip, setShowTooltip] = useState(false);
+  const [showWhatsappTooltip, setShowWhatsappTooltip] = useState(false);
+  const [showCallTooltip, setShowCallTooltip] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,82 +29,137 @@ export const FloatingActions = () => {
   };
 
   const cleanWhatsappNumber = AGENCY_INFO.whatsapp.replace(/[^0-9]/g, '');
+  const cleanPhoneNumber = AGENCY_INFO.phone.replace(/[^0-9+]/g, '');
   const whatsappUrl = `https://wa.me/${cleanWhatsappNumber}?text=${encodeURIComponent(
     "Hello Vestal Web Solutions, I would like to inquire about website development services for my business."
   )}`;
 
   return (
-    <div 
-      id="global-floating-actions"
-      className="fixed bottom-5 sm:bottom-6 right-4 sm:right-6 z-50 flex flex-col items-end gap-3 pointer-events-auto select-none"
-    >
-      {/* 1. Back to Top Scroll Button */}
-      <AnimatePresence>
-        {showScrollTop && (
-          <motion.button
-            key="back-to-top"
-            id="back-to-top-btn"
-            initial={{ opacity: 0, scale: 0.7, y: 15 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.7, y: 15 }}
-            transition={{ duration: 0.25, ease: 'easeOut' }}
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={scrollToTop}
-            aria-label="Back to top"
-            className="w-12 h-12 rounded-full bg-white text-[#1E3A8A] hover:bg-[#0F52BA] hover:text-white border border-slate-200/90 shadow-xl flex items-center justify-center transition-colors duration-200 cursor-pointer group"
-          >
-            <ChevronUp className="w-5 h-5 transition-transform duration-200 group-hover:-translate-y-0.5" />
-          </motion.button>
-        )}
-      </AnimatePresence>
-
-      {/* 2. WhatsApp Floating Chat Trigger */}
+    <>
+      {/* 1. Left Side "Call Now" Floating Button */}
       <div 
-        className="relative flex items-center"
-        onMouseEnter={() => setShowTooltip(true)}
-        onMouseLeave={() => setShowTooltip(false)}
+        id="global-call-now-action"
+        className="fixed bottom-5 sm:bottom-6 left-4 sm:left-6 z-50 flex items-center pointer-events-auto select-none"
+        onMouseEnter={() => setShowCallTooltip(true)}
+        onMouseLeave={() => setShowCallTooltip(false)}
       >
-        {/* Tooltip on Desktop */}
+        <motion.a
+          id="global-call-trigger"
+          href={`tel:${cleanPhoneNumber}`}
+          aria-label={`Call Vestal Web Solutions at ${AGENCY_INFO.phone}`}
+          whileHover={{ scale: 1.06 }}
+          whileTap={{ scale: 0.95 }}
+          className="relative group flex items-center gap-2 sm:gap-2.5 bg-gradient-to-r from-[#0F52BA] to-[#1E3A8A] hover:from-[#1E3A8A] hover:to-[#0F52BA] text-white px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-full shadow-xl shadow-blue-900/30 border-2 border-white cursor-pointer transition-all duration-200"
+        >
+          {/* Subtle Ambient Pulse Ripple */}
+          <span className="absolute -inset-1 rounded-full bg-[#0F52BA] opacity-35 animate-ping pointer-events-none" />
+
+          {/* Animated Phone Icon */}
+          <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center shrink-0">
+            <Phone className="w-4 h-4 text-white animate-pulse" />
+          </div>
+
+          {/* Label + Mobile Number */}
+          <div className="flex flex-col text-left leading-tight pr-1">
+            <span className="text-xs sm:text-sm font-bold tracking-tight text-white flex items-center gap-1.5">
+              Call Now
+            </span>
+            <span className="text-[11px] font-semibold text-cyan-200 hidden sm:inline tracking-wide">
+              {AGENCY_INFO.phone}
+            </span>
+          </div>
+        </motion.a>
+
+        {/* Tooltip on Hover */}
         <AnimatePresence>
-          {showTooltip && (
+          {showCallTooltip && (
             <motion.div
-              initial={{ opacity: 0, x: 10, scale: 0.9 }}
+              initial={{ opacity: 0, x: -10, scale: 0.9 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}
-              exit={{ opacity: 0, x: 10, scale: 0.9 }}
+              exit={{ opacity: 0, x: -10, scale: 0.9 }}
               transition={{ duration: 0.15 }}
-              className="hidden sm:block absolute right-16 px-3.5 py-1.5 bg-slate-900/95 text-white text-xs font-semibold rounded-xl shadow-lg whitespace-nowrap border border-slate-700 pointer-events-none"
+              className="hidden sm:block absolute left-full ml-3 px-3 py-1.5 bg-slate-900/95 text-white text-xs font-semibold rounded-xl shadow-lg whitespace-nowrap border border-slate-700 pointer-events-none"
             >
-              Chat on WhatsApp
-              <div className="absolute right-[-4px] top-1/2 -translate-y-1/2 w-2 h-2 bg-slate-900/95 rotate-45 border-r border-t border-slate-700" />
+              Click to Call: {AGENCY_INFO.phone}
+              <div className="absolute left-[-4px] top-1/2 -translate-y-1/2 w-2 h-2 bg-slate-900/95 rotate-45 border-l border-b border-slate-700" />
             </motion.div>
           )}
         </AnimatePresence>
-
-        {/* WhatsApp Button */}
-        <motion.a
-          id="global-whatsapp-trigger"
-          href={whatsappUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Chat with us on WhatsApp"
-          whileHover={{ scale: 1.08 }}
-          whileTap={{ scale: 0.95 }}
-          className="relative w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white shadow-xl shadow-emerald-500/25 flex items-center justify-center transition-colors duration-200 cursor-pointer border-2 border-white group"
-        >
-          {/* Subtle Ambient Pulse Ripple */}
-          <span className="absolute -inset-1 rounded-full bg-[#25D366] opacity-30 animate-ping pointer-events-none" />
-
-          {/* Authentic WhatsApp Vector Icon */}
-          <svg 
-            viewBox="0 0 24 24" 
-            fill="currentColor" 
-            className="w-7 h-7 relative z-10"
-          >
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-          </svg>
-        </motion.a>
       </div>
-    </div>
+
+      {/* 2. Right Side Floating Actions (Back to Top + WhatsApp) */}
+      <div 
+        id="global-floating-actions"
+        className="fixed bottom-5 sm:bottom-6 right-4 sm:right-6 z-50 flex flex-col items-end gap-3 pointer-events-auto select-none"
+      >
+        {/* Back to Top Scroll Button */}
+        <AnimatePresence>
+          {showScrollTop && (
+            <motion.button
+              key="back-to-top"
+              id="back-to-top-btn"
+              initial={{ opacity: 0, scale: 0.7, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.7, y: 15 }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={scrollToTop}
+              aria-label="Back to top"
+              className="w-12 h-12 rounded-full bg-white text-[#1E3A8A] hover:bg-[#0F52BA] hover:text-white border border-slate-200/90 shadow-xl flex items-center justify-center transition-colors duration-200 cursor-pointer group"
+            >
+              <ChevronUp className="w-5 h-5 transition-transform duration-200 group-hover:-translate-y-0.5" />
+            </motion.button>
+          )}
+        </AnimatePresence>
+
+        {/* WhatsApp Floating Chat Trigger */}
+        <div 
+          className="relative flex items-center"
+          onMouseEnter={() => setShowWhatsappTooltip(true)}
+          onMouseLeave={() => setShowWhatsappTooltip(false)}
+        >
+          {/* Tooltip on Desktop */}
+          <AnimatePresence>
+            {showWhatsappTooltip && (
+              <motion.div
+                initial={{ opacity: 0, x: 10, scale: 0.9 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                exit={{ opacity: 0, x: 10, scale: 0.9 }}
+                transition={{ duration: 0.15 }}
+                className="hidden sm:block absolute right-16 px-3.5 py-1.5 bg-slate-900/95 text-white text-xs font-semibold rounded-xl shadow-lg whitespace-nowrap border border-slate-700 pointer-events-none"
+              >
+                Chat on WhatsApp
+                <div className="absolute right-[-4px] top-1/2 -translate-y-1/2 w-2 h-2 bg-slate-900/95 rotate-45 border-r border-t border-slate-700" />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* WhatsApp Button */}
+          <motion.a
+            id="global-whatsapp-trigger"
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Chat with us on WhatsApp"
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.95 }}
+            className="relative w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white shadow-xl shadow-emerald-500/25 flex items-center justify-center transition-colors duration-200 cursor-pointer border-2 border-white group"
+          >
+            {/* Subtle Ambient Pulse Ripple */}
+            <span className="absolute -inset-1 rounded-full bg-[#25D366] opacity-30 animate-ping pointer-events-none" />
+
+            {/* Authentic WhatsApp Vector Icon */}
+            <svg 
+              viewBox="0 0 24 24" 
+              fill="currentColor" 
+              className="w-7 h-7 relative z-10"
+            >
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>
+          </motion.a>
+        </div>
+      </div>
+    </>
   );
 };

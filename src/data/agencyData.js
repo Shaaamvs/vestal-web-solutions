@@ -17,6 +17,10 @@ export const AGENCY_INFO = {
   whatsapp: "+91 75501 56797",
   location: "India • Serving Global Clients",
   hours: "Monday – Saturday: 9:00 AM – 7:00 PM IST",
+  social: {
+    instagram: "https://www.instagram.com/vestalwebsolutions/",
+    linkedin: "https://www.linkedin.com/company/vestal-web-solutions/?viewAsMember=true"
+  },
   stats: [
     { value: "100%", label: "Client Focus", sublabel: "Custom tailored solutions" },
     { value: "< 1.0s", label: "Page Load Speed", sublabel: "Core Web Vitals passed" },

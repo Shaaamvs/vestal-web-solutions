@@ -4,9 +4,8 @@ import {
   Mail,
   ChevronRight,
   Linkedin,
-  Twitter,
   Instagram,
-  Facebook
+  Phone
 } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';
 import logo from '../image/V.svg';
@@ -74,46 +73,47 @@ export const Footer = ({ onNavigate }) => {
               {/* Direct contact link */}
               <div className="pt-2 space-y-2">
                 <a
-                  href={`mailto:${AGENCY_INFO.email}`}
+                  href={`tel:${AGENCY_INFO.phone.replace(/[^0-9+]/g, '')}`}
                   className="inline-flex items-center gap-2 text-sm text-[#60A5FA] hover:text-white transition-colors group"
                 >
-                  <Mail className="w-4 h-4 text-[#0F52BA] group-hover:text-white" />
-                  <span className="font-medium underline">{AGENCY_INFO.email}</span>
+                  <Phone className="w-4 h-4 text-[#0F52BA] group-hover:text-[#60A5FA]" />
+                  <span className="font-semibold text-white group-hover:text-blue-200 transition-colors">{AGENCY_INFO.phone}</span>
                 </a>
+                <div>
+                  <a
+                    href={`mailto:${AGENCY_INFO.email}`}
+                    className="inline-flex items-center gap-2 text-sm text-slate-300 hover:text-white transition-colors group"
+                  >
+                    <Mail className="w-4 h-4 text-[#0F52BA] group-hover:text-white" />
+                    <span className="font-medium underline">{AGENCY_INFO.email}</span>
+                  </a>
+                </div>
                 <div className="text-xs text-slate-400">
                   Mon – Sat: 9:00 AM – 7:00 PM IST
                 </div>
               </div>
 
-              {/* Social Icons */}
+              {/* Social Icons - LinkedIn and Instagram */}
               <div className="flex items-center space-x-3 pt-2">
                 <a
-                  href="#contact"
-                  className="w-8 h-8 rounded-lg bg-slate-800 hover:bg-[#0F52BA] text-slate-300 hover:text-white flex items-center justify-center transition-all hover:scale-110 duration-200"
-                  aria-label="LinkedIn"
+                  href="https://www.linkedin.com/company/vestal-web-solutions/?viewAsMember=true"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-lg bg-slate-800 hover:bg-[#0A66C2] text-slate-300 hover:text-white flex items-center justify-center transition-all hover:scale-110 duration-200 border border-slate-700/60 shadow-xs"
+                  aria-label="Follow Vestal Web Solutions on LinkedIn"
+                  title="Follow on LinkedIn"
                 >
                   <Linkedin className="w-4 h-4" />
                 </a>
                 <a
-                  href="#contact"
-                  className="w-8 h-8 rounded-lg bg-slate-800 hover:bg-[#0F52BA] text-slate-300 hover:text-white flex items-center justify-center transition-all hover:scale-110 duration-200"
-                  aria-label="Twitter / X"
-                >
-                  <Twitter className="w-4 h-4" />
-                </a>
-                <a
-                  href="#contact"
-                  className="w-8 h-8 rounded-lg bg-slate-800 hover:bg-[#0F52BA] text-slate-300 hover:text-white flex items-center justify-center transition-all hover:scale-110 duration-200"
-                  aria-label="Instagram"
+                  href="https://www.instagram.com/vestalwebsolutions/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-lg bg-slate-800 hover:bg-gradient-to-tr hover:from-[#f09433] hover:via-[#dc2743] hover:to-[#bc1888] text-slate-300 hover:text-white flex items-center justify-center transition-all hover:scale-110 duration-200 border border-slate-700/60 shadow-xs"
+                  aria-label="Follow Vestal Web Solutions on Instagram"
+                  title="Follow on Instagram"
                 >
                   <Instagram className="w-4 h-4" />
-                </a>
-                <a
-                  href="#contact"
-                  className="w-8 h-8 rounded-lg bg-slate-800 hover:bg-[#0F52BA] text-slate-300 hover:text-white flex items-center justify-center transition-all hover:scale-110 duration-200"
-                  aria-label="Facebook"
-                >
-                  <Facebook className="w-4 h-4" />
                 </a>
               </div>
             </div>

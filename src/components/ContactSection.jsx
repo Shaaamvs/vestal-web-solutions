@@ -9,7 +9,8 @@ import {
   MessageSquare, 
   AlertCircle,
   Loader2,
-  Check
+  Check,
+  Phone
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ScrollReveal } from './ScrollReveal';
@@ -262,6 +263,23 @@ export const ContactSection = ({ preselectedServiceOrPackage }) => {
 
                 {/* Direct Channels */}
                 <div className="space-y-3 pt-2 border-t border-slate-700/80">
+                  <a
+                    href={`tel:${AGENCY_INFO.phone.replace(/[^0-9+]/g, '')}`}
+                    className="flex items-center gap-3.5 p-3 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 transition-all group"
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-emerald-600 group-hover:bg-emerald-500 text-white flex items-center justify-center transition-colors shadow-xs">
+                      <Phone className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <div className="text-[11px] font-bold text-cyan-300 uppercase tracking-wide">
+                        Direct Phone Call
+                      </div>
+                      <div className="text-sm font-semibold text-white group-hover:text-cyan-200 transition-colors">
+                        {AGENCY_INFO.phone}
+                      </div>
+                    </div>
+                  </a>
+
                   <a
                     href={`mailto:${AGENCY_INFO.email}`}
                     className="flex items-center gap-3.5 p-3 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 transition-all group"
